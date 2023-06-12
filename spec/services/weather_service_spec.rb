@@ -22,7 +22,7 @@ RSpec.describe WeatherService do
     latlon = '40.2337,-111.66889'
     service = WeatherService.new
     data = service.get_forecast(latlon)
-    
+
     forecast_days = data[:forecast][:forecastday].each do |day|
       expect(day).to be_a Hash
       expect(day[:date]).to be_a String
