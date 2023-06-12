@@ -10,5 +10,4 @@ class GeocodeFacade
     def service
       @_service = GeocodeService.new
     end
-
 end
