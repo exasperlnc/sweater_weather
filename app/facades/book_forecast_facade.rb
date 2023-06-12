@@ -4,7 +4,7 @@ class BookForecastFacade
     latlon = geocode_facade.get_lat_lon(location)
     forecast = weather_facade.weather(latlon)
     books = book_facade.books(location)
-    BookForecast.new(format_forecast(forecast), (books))
+    BookForecast.new(format_forecast(forecast), (books), (location))
   end
     
   private 
