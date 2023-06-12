@@ -1,11 +1,11 @@
 class BookForecast
-  attr_reader :summary, :temperature, :books, :id, :location
+  attr_reader :summary, :temperature, :books, :id, :destination
 
   def initialize(data, books, location)
     @id = nil
     @summary = data[:summary]
     @temperature = data[:temperature]
     @books = books
-    @location = location
+    @destination = location
   end
 end
