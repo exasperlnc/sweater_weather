@@ -1,7 +1,12 @@
 class WeatherService
 
+  def get_forecast(latlon)
+    response = conn.get("forecast.json?q=#{latlon}&days=5")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
   def get_weather(latlon)
-    response = conn.get("current.json?q=#{latlon}}")
+    response = conn.get("current.json?q=#{latlon}")
     JSON.parse(response.body, symbolize_names: true)
   end
 
