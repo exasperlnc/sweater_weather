@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe WeatherFacade do
   it 'returns a forecast' do
-    get '/api/v1/forecast?location=denver,co'
+    get '/api/v0/forecast?location=denver,co'
     expect(response).to be_successful
     expect(response.status).to eq(200)
 
