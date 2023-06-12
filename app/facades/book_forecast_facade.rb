@@ -1,10 +1,10 @@
 class BookForecastFacade
 
-  def get_forecast_books(location)
+  def get_forecast_books(location, quantity)
     latlon = geocode_facade.get_lat_lon(location)
     forecast = weather_facade.weather(latlon)
     books = book_facade.books(location)
-    BookForecast.new(format_forecast(forecast), (books), (location))
+    BookForecast.new(format_forecast(forecast), (books), (location), quantity)
   end
     
   private 

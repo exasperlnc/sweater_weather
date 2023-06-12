@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe BookForecastFacade do
   it 'returns books and forecast for locaiton' do
     location = 'denver, co'
+    quantity = '5'
     facade = BookForecastFacade.new
-    book_forecast = facade.get_forecast_books(location)
+    book_forecast = facade.get_forecast_books(location, quantity)
     
     expect(book_forecast).to be_a BookForecast
     expect(book_forecast.id).to eq(nil)
@@ -13,6 +14,7 @@ RSpec.describe BookForecastFacade do
     expect(book_forecast.destination).to be_a String
     expect(book_forecast.books).to be_a Array
     expect(book_forecast.total_books_found).to be_a Integer
+    expect(book_forecast.books.count).to eq(quantity.to_i)
     book_forecast.books.each do |book|
       expect(book).to be_a Book
     end
