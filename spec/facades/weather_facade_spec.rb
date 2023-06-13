@@ -12,4 +12,14 @@ RSpec.describe WeatherFacade do
     expect(forecast.hourly_weather).to be_a Array
     expect(forecast.hourly_weather.first).to be_a HourlyWeather
   end
+
+  it 'returns weather_at_eta' do
+    location = 'denver,co'
+    weather_eta = WeatherFacade.new.weather_at_eta(location, 0, 2)
+    
+    expect(weather_eta).to be_a WeatherEta
+    expect(weather_eta.temperature).to be_a Float
+    expect(weather_eta.conditions).to be_a String
+    expect(weather_eta.datetime).to be_a String
+  end
 end
