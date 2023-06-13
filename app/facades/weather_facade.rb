@@ -13,6 +13,11 @@ class WeatherFacade
     Forecast.new(current_weather, daily_weather, hourly_weather)
   end
 
+  def weather_at_eta(latlon, days, hours)
+    data = service.get_forecast(latlon)
+    WeatherEta.new(data[:forecast][:forecastday][days][:hour][hours])
+  end
+
   private 
 
     def service
