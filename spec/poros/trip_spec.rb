@@ -19,7 +19,7 @@ RSpec.describe Trip do
     expect(trip).to be_a Trip
     expect(trip.start_city).to eq("Cincinnati, OH")
     expect(trip.end_city).to eq("Denver, CO")
-    expect(trip.formattedTime).to eq("04:40:45")
+    expect(trip.travel_time).to eq("04:40:45")
     expect(trip.weather_at_eta).to be_a Hash
     expect(trip.weather_at_eta[:datetime]).to eq("2021-05-07 21:00")
     expect(trip.weather_at_eta[:temperature]).to eq(72.0)

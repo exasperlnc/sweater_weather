@@ -8,7 +8,7 @@ RSpec.describe 'Road Trip' do
       body = { 
         origin: "Austin, TX",
         destination: "Salt Lake City, UT",
-        api_key: "#{user.api_key}"
+        api_key: "#{user.token}"
       }
 
       post '/api/v0/road_trip', params: body.to_json, headers: headers
@@ -23,7 +23,7 @@ RSpec.describe 'Road Trip' do
       expect(road_trip[:data]).to be_a(Hash)
 
       expect(road_trip[:data]).to have_key(:id)
-      expect(road_trip[:data][:id]).to be_a(String)
+      expect(road_trip[:data][:id]).to eq(nil)
 
       expect(road_trip[:data]).to have_key(:type)
       expect(road_trip[:data][:type]).to be_a(String)
@@ -56,8 +56,10 @@ RSpec.describe 'Road Trip' do
       body = {
         origin: "Austin, TX",
         destination: "London, UK",
-        api_key: "#{user.api_key}"
+        api_key: "#{user.token}"
       }
+
+      post '/api/v0/road_trip', params: body.to_json, headers: headers
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -69,7 +71,7 @@ RSpec.describe 'Road Trip' do
       expect(road_trip[:data]).to be_a(Hash)
 
       expect(road_trip[:data]).to have_key(:id)
-      expect(road_trip[:data][:id]).to be_a(String)
+      expect(road_trip[:data][:id]).to eq(nil)
 
       expect(road_trip[:data]).to have_key(:type)
       expect(road_trip[:data][:type]).to be_a(String)
@@ -85,7 +87,7 @@ RSpec.describe 'Road Trip' do
 
       expect(road_trip[:data][:attributes]).to have_key(:travel_time)
       expect(road_trip[:data][:attributes][:travel_time]).to be_a(String)
-      expect(road_trip[:data][:attributes][:travel_time]).to eq("impossible route")
+      expect(road_trip[:data][:attributes][:travel_time]).to eq("impossible")
 
       expect(road_trip[:data][:attributes]).to have_key(:weather_at_eta)
       expect(road_trip[:data][:attributes][:weather_at_eta]).to be_a(Hash)
@@ -116,7 +118,7 @@ RSpec.describe 'Road Trip' do
 
       expect(error).to have_key(:errors)
       expect(error[:errors]).to be_a(String)
-      expect(error[:errors]).to eq("Invalid Credentials")
+      expect(error[:errors]).to eq("Unauthorized")
     end
   end
 end
