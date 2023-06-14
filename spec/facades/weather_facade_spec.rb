@@ -15,7 +15,7 @@ RSpec.describe WeatherFacade do
 
   it 'returns weather_at_eta' do
     location = 'denver,co'
-    weather_eta = WeatherFacade.new.weather_at_eta(location, 0, 2)
+    weather_eta = WeatherFacade.new.weather_at_eta(location, 0, 2, "5:52 AM")
     
     expect(weather_eta).to be_a WeatherEta
     expect(weather_eta.temperature).to be_a Float

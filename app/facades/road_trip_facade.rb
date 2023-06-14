@@ -5,10 +5,8 @@ class RoadTripFacade
       return BadTrip.new(origin, destination)
     end
     latlon = geocode_facade.get_lat_lon(destination)
-    # use timezone facade to get needed timing info
     arrival_time = TimeZoneFacade.new(data[:route][:realTime], latlon[:lat], latlon[:lng] ).get_arrival_time
-    # pass that info to the weather facade
-    weather = weather_facade.weather_at_eta(latlon, format_time(data[:route][:formattedTime][0]), format_time(data[:route][:formattedTime][1]) )
+    weather = weather_facade.weather_at_eta(latlon, format_time(data[:route][:formattedTime][0]), format_time(data[:route][:formattedTime][1]), arrival_time)
     Trip.new(data, origin, destination, weather)
   end
 
