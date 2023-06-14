@@ -5,9 +5,9 @@ class RoadTripFacade
       return BadTrip.new(origin, destination)
     end
     latlon = geocode_facade.get_lat_lon(destination)
-    #for the line below (8), I don't have a way to get
-    #the time from the data
-    #so I'm just passing in 0 for now
+    require 'pry'; binding.pry
+    # use timezone facade to get needed timing info
+    # pass that info to the weather facade
     weather = weather_facade.weather_at_eta(latlon, format_time(data[:route][:formattedTime][0]), format_time(data[:route][:formattedTime][1]) )
     Trip.new(data, origin, destination, weather)
   end
@@ -27,5 +27,9 @@ class RoadTripFacade
 
     def format_time(time)
       time.split(":")
+    end
+
+    def time_zone_facade
+      @_time_zone_facade = TimeZoneFacade.new
     end
 end
